@@ -7,11 +7,11 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
 
-        Calciatore[] giocatori = new Calciatore[100]; // array abbastanza grande
+        Calciatore[] giocatori = new Calciatore[100];
         int count = 0;
 
         try (BufferedReader reader = new BufferedReader(new FileReader("input.csv"))) {
-            String header = reader.readLine(); // salto l'intestazione
+            String header = reader.readLine();
             String line;
 
             while ((line = reader.readLine()) != null) {
