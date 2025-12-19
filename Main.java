@@ -3,6 +3,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,12 +12,14 @@ public class Main {
         Calciatore[] giocatori = new Calciatore[100];
         int count = 0;
 
+        // LETTURA FILE
         try (BufferedReader reader = new BufferedReader(new FileReader("input.csv"))) {
-            String header = reader.readLine();
             String line;
+            reader.readLine(); // salta intestazione
 
             while ((line = reader.readLine()) != null) {
                 String[] campi = line.split(",");
+
                 if (campi.length == 6) {
                     String squadra = campi[0];
                     String nome = campi[1];
@@ -24,7 +28,9 @@ public class Main {
                     int gol = Integer.parseInt(campi[4]);
                     int assist = Integer.parseInt(campi[5]);
 
-                    giocatori[count++] = new Calciatore(squadra, nome, ruolo, partite, gol, assist);
+                    giocatori[count++] = new Calciatore(
+                            squadra, nome, ruolo, partite, gol, assist
+                    );
                 }
             }
 
@@ -33,6 +39,12 @@ public class Main {
             return;
         }
 
+        // ORDINAMENTO PER GOL (decrescente)
+        Arrays.sort(giocatori, 0, count,
+                Comparator.comparingInt(Calciatore::getGol).reversed()
+        );
+
+        // SCRITTURA FILE
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("copia.csv"))) {
 
             writer.write("Squadra,Calciatore,Ruolo,Partite,Gol,Assist");
@@ -50,4 +62,3 @@ public class Main {
         }
     }
 }
-
