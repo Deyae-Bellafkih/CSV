@@ -16,6 +16,30 @@ public class Calciatore {
         this.assist = assist;
     }
 
+    public int getAssist() {
+        return assist;
+    }
+
+    public int getGol() {
+        return gol;
+    }
+
+    public int getPartite() {
+        return partite;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getRuolo() {
+        return ruolo;
+    }
+
+    public String getSquadra() {
+        return squadra;
+    }
+
     public static Calciatore fromCSV(String csv) {
         String[] campi = csv.split(",");
         String squadra = campi[0];
